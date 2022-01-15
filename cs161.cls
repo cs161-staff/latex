@@ -3,6 +3,9 @@
 
 \LoadClass{exam}
 
+\RequirePackage[T1]{fontenc}
+\RequirePackage{sectsty}
+
 \makeatletter
 
 % Course number, course name, instructor, term.
@@ -14,5 +17,11 @@
 \newcommand{\coursename}{\renewcommand{\coursename@ucbcs}}
 \newcommand{\courseterm}{\renewcommand{\courseterm@ucbcs}}
 \newcommand{\courseinstructor}{\renewcommand{\courseinstructor@ucbcs}}
+
+% Set section styles with sectsty.
+\newcommand{\headerff@ucbcs}{\fontfamily{cmdh}\selectfont}
+\sectionfont{\headerff@ucbcs\huge}
+\subsectionfont{\headerff@ucbcs\Large}
+\subsubsectionfont{\headerff@ucbcs\large}
 
 \makeatother
