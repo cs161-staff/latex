@@ -10,6 +10,7 @@
 \RequirePackage[straightquotes]{newtxtt}
 \RequirePackage{sectsty}
 \RequirePackage{tikz}
+\RequirePackage{hyperref}
 
 \makeatletter
 
