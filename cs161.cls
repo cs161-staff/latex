@@ -7,6 +7,7 @@
 \RequirePackage[tt=false]{libertine}
 \RequirePackage{microtype}
 \RequirePackage{multicol}
+\RequirePackage{listings}
 \RequirePackage[straightquotes]{newtxtt}
 \RequirePackage{sectsty}
 \RequirePackage{tikz}
@@ -121,6 +122,20 @@
   \ifnum\numcols@ucbcs>1
     \end{multicols}
   \fi
+}
+
+% listings formating.
+\lstset{
+  numbers=left,
+  stepnumber=1,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  frame=single,
+  tabsize=4,
+  breaklines=true,
+  breakatwhitespace=false,
 }
 
 \makeatother
