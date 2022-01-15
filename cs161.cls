@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cs161}[2022/01/14 v1.0 by Nicholas Ngai]
 
-\LoadClass{exam}
+\LoadClass[addpoints]{exam}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{sectsty}
@@ -63,5 +63,9 @@
   \footerstyle@ucbcs
   \courseno@ucbcs{} -- \courseterm@ucbcs
 }
+
+% Exam question formatting.
+\qformat{\bf {\Large{Q\thequestion}} \quad \textit{\thequestiontitle} \hfill (\totalpoints{} \points)}
+\renewcommand{\partlabel}{Q\thequestion.\arabic{partno}}
 
 \makeatother
