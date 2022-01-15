@@ -4,7 +4,10 @@
 \LoadClass[addpoints]{exam}
 
 \RequirePackage[T1]{fontenc}
+\RequirePackage[tt=false]{libertine}
+\RequirePackage{microtype}
 \RequirePackage{multicol}
+\RequirePackage[straightquotes]{newtxtt}
 \RequirePackage{sectsty}
 \RequirePackage{tikz}
 
