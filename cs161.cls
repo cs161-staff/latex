@@ -4,9 +4,14 @@
 \LoadClass[addpoints]{exam}
 
 \RequirePackage[T1]{fontenc}
+\RequirePackage{multicol}
 \RequirePackage{sectsty}
+\RequirePackage{tikz}
 
 \makeatletter
+
+% Config.
+\newif{\ifanswerletters}
 
 % Course number, course name, instructor, term.
 \newcommand{\courseno@ucbcs}{}
@@ -47,7 +52,10 @@
   \vspace{0.5\baselineskip}
   \vspace{5pt}\hrule width 0pt height 3pt
 }
-\extrafootheight{-1in}
+% \RequirePackage{tikz} above changes this from -1in to -0.25in. I have no idea
+% why.
+%\extrafootheight{-1in}
+\extrafootheight{-0.25in}
 \newcommand{\footerstyle@ucbcs}{\footnotesize}
 \firstpagefooter{}{
   \footerstyle@ucbcs
@@ -67,5 +75,48 @@
 % Exam question formatting.
 \qformat{\bf {\Large{Q\thequestion}} \quad \textit{\thequestiontitle} \hfill (\totalpoints{} \points)}
 \renewcommand{\partlabel}{Q\thequestion.\arabic{partno}}
+
+% Multiple-choice formatting.
+\newif{\ifcorrectchoice@ucbcs}
+\newcommand{\coloredbubble@ucbcs}[1][none]{\tikz[baseline=-0.5ex]\draw[black,very thick,fill=#1] (0,0) circle (0.5em);}
+\newcommand{\bubble@ucbcs}{\coloredbubble@ucbcs}
+\newcommand{\solbubble@ucbcs}{\coloredbubble@ucbcs[black]}
+\newcommand{\choice}{\correctchoice@ucbcsfalse\item\ifanswerletters(\Alph{enumi})\fi\ }
+\newcommand{\CorrectChoice}{\correctchoice@ucbcstrue\item\ifanswerletters(\Alph{enumi})\fi\ }
+\newcommand{\numcols@ucbcs}{} % TODO Error if \renewcommand isn't called.
+\renewenvironment{choices}[1][1]{
+  \renewcommand{\numcols@ucbcs}{#1}
+  \ifnum\numcols@ucbcs>1
+    \begin{multicols}{\numcols@ucbcs}
+  \fi
+  \begin{enumerate}
+    \renewcommand{\labelenumi}{\ifprintanswers\ifcorrectchoice@ucbcs\solbubble@ucbcs\else\bubble@ucbcs\fi\else\bubble@ucbcs\fi}
+    \setlength{\itemsep}{1em}
+}{
+  \end{enumerate}
+  \ifnum\numcols@ucbcs>1
+    \end{multicols}
+  \fi
+}
+
+% Select-all formatting.
+% Use \ifcorrectchoice@ucbcs, \choice, \CorrectChoice, and \numcols@ucbcs from above.
+\newcommand{\coloredselect@ucbcs}[1][none]{\tikz[baseline=0.1ex]\draw[black,very thick,fill=#1] (0,0) rectangle (8pt, 8pt);}
+\newcommand{\select@ucbcs}{\coloredselect@ucbcs}
+\newcommand{\solselect@ucbcs}{\coloredselect@ucbcs[black]}
+\renewenvironment{checkboxes}[1][1]{
+  \renewcommand{\numcols@ucbcs}{#1}
+  \ifnum\numcols@ucbcs>1
+    \begin{multicols}{\numcols@ucbcs}
+  \fi
+  \begin{enumerate}
+    \renewcommand{\labelenumi}{\ifprintanswers\ifcorrectchoice@ucbcs\solselect@ucbcs\else\select@ucbcs\fi\else\select@ucbcs\fi}
+    \setlength{\itemsep}{1em}
+}{
+  \end{enumerate}
+  \ifnum\numcols@ucbcs>1
+    \end{multicols}
+  \fi
+}
 
 \makeatother
