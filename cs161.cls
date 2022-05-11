@@ -62,15 +62,19 @@
 % \RequirePackage{tikz} above changes this from -1in to -0.25in. I have no idea
 % why.
 %\extrafootheight{-1in}
-\extrafootheight{-0.25in}
 \newcommand{\footerstyle@ucbcs}{\footnotesize}
-\firstpagefooter{}{
+\firstpagefooter{
+  \footerstyle@ucbcs
+  \strut \\ \vspace{1em}
+  \textit{This content is protected and may not be shared, uploaded, or distributed.}
+}{
   \footerstyle@ucbcs
   Page \thepage{} of \numpages
 }{}
 \runningfooter{
   \footerstyle@ucbcs
-  \@title
+  \@title \\ \vspace{1em}
+  \textit{This content is protected and may not be shared, uploaded, or distributed.}
 }{
   \footerstyle@ucbcs
   Page \thepage{} of \numpages
