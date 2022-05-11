@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cs161}[2022/01/14 v1.0 by Nicholas Ngai]
+\ProvidesClass{cs161}[2022/05/11 v1.1 by Nicholas Ngai]
 
 \LoadClass[addpoints,11pt]{exam}
 
