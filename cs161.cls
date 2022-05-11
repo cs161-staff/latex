@@ -17,6 +17,8 @@
 
 % Config.
 \newif{\ifanswerletters}
+\newif{\iflargeprint}
+\newif{\ifanswerletters}
 
 % Course number, course name, instructor, term.
 \newcommand{\courseno@ucbcs}{}
@@ -96,7 +98,7 @@
   \fi
   \begin{enumerate}
     \renewcommand{\labelenumi}{\ifprintanswers\ifcorrectchoice@ucbcs\solbubble@ucbcs\else\bubble@ucbcs\fi\else\bubble@ucbcs\fi}
-    \setlength{\itemsep}{1em}
+    \setlength{\itemsep}{\iflargeprint0.25em\else1em\fi}
 }{
   \end{enumerate}
   \ifnum\numcols@ucbcs>1
@@ -116,7 +118,7 @@
   \fi
   \begin{enumerate}
     \renewcommand{\labelenumi}{\ifprintanswers\ifcorrectchoice@ucbcs\solselect@ucbcs\else\select@ucbcs\fi\else\select@ucbcs\fi}
-    \setlength{\itemsep}{1em}
+    \setlength{\itemsep}{\iflargeprint0.25em\else1em\fi}
 }{
   \end{enumerate}
   \ifnum\numcols@ucbcs>1
@@ -136,6 +138,19 @@
   tabsize=4,
   breaklines=true,
   breakatwhitespace=false,
+}
+
+% Large print.
+\let\olddocument@ucbcs\document
+\renewcommand{\document}{
+  \iflargeprint
+    \extraheadheight[0.8in]{-0.5in}
+    \extrawidth{1in}
+  \fi
+  \olddocument@ucbcs
+  \iflargeprint
+    \LARGE
+  \fi
 }
 
 \makeatother
