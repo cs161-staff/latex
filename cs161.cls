@@ -139,7 +139,7 @@
 
 % Multiple-choice formatting.
 \newif{\ifcorrectchoice@ucbcs}
-\newcommand{\coloredbubble@ucbcs}[1][none]{\tikz[baseline=-0.5ex]\draw[black,very thick,fill=#1] (0,0) circle (0.5em);}
+\newcommand{\coloredbubble@ucbcs}[1][none]{\tikz[baseline=-0.5ex]\draw[black,very thick,fill=#1] (0,0) circle (4.5pt);}
 \newcommand{\bubble@ucbcs}{\coloredbubble@ucbcs}
 \newcommand{\solbubble@ucbcs}{\coloredbubble@ucbcs[black]}
 \newcommand{\choice}{\correctchoice@ucbcsfalse\item\ifanswerletters(\Alph{enumi})\fi\ }
