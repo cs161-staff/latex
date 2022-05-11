@@ -87,6 +87,56 @@
 \qformat{\bf {\Large{Q\thequestion}} \quad \textit{\thequestiontitle} \hfill (\totalpoints{} \points)}
 \renewcommand{\partlabel}{Q\thequestion.\arabic{partno}}
 
+% Redefine parts environment and uplevel command to prevent parts from being
+% broken across pages.
+\let\oldparts@ucbcs\parts
+\let\endoldparts@ucbcs\endparts
+\newif\ifprevpart@ucbcs
+\newlength{\oldparskip@ucbcs}
+\renewenvironment{parts}{
+  \begin{oldparts@ucbcs}
+  \let\oldpart@ucbcs\part
+  \renewcommand{\part}{
+    \ifprevpart@ucbcs
+      \end{minipage}
+    \fi
+    \strut
+    \setlength{\oldparskip@ucbcs}{\parskip}
+    \begin{minipage}[t]{\linewidth}
+    \setlength{\parskip}{\oldparskip@ucbcs}
+    \prevpart@ucbcstrue
+    \oldpart@ucbcs
+  }
+}{
+  \end{minipage}
+  \prevpart@ucbcsfalse
+  \end{oldparts@ucbcs}
+}
+\let\olduplevel@ucbcs\uplevel
+\renewcommand{\uplevel}[1]{
+  \ifprevpart@ucbcs
+    \end{minipage}
+  \fi
+  \olduplevel@ucbcs{#1}
+  \ifprevpart@ucbcs
+    \setlength{\oldparskip@ucbcs}{\parskip}
+    \begin{minipage}[t]{\linewidth}
+    \setlength{\parskip}{\oldparskip@ucbcs}
+  \fi
+}
+
+% Redefine \pagebreak so it works in parts.
+\let\oldpagebreak@ucbcs\pagebreak
+\renewcommand{\pagebreak}{
+  \ifprevpart@ucbcs
+    \end{minipage}
+  \fi
+  \oldpagebreak@ucbcs
+  \ifprevpart@ucbcs
+    \start{minipage}
+  \fi
+}
+
 % Multiple-choice formatting.
 \newif{\ifcorrectchoice@ucbcs}
 \newcommand{\coloredbubble@ucbcs}[1][none]{\tikz[baseline=-0.5ex]\draw[black,very thick,fill=#1] (0,0) circle (0.5em);}
