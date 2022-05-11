@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cs161}[2022/01/14 v1.0 by Nicholas Ngai]
 
-\LoadClass[addpoints]{exam}
+\LoadClass[addpoints,11pt]{exam}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage[tt=false]{libertine}
